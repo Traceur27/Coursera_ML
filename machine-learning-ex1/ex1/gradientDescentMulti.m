@@ -17,20 +17,15 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-
-
-
-
-
-
-
-
-
+    hyphotesis = X * theta;
+    theta = theta - alpha * (X' * (hyphotesis - y))/m;
 
     % ============================================================
 
     % Save the cost J in every iteration    
-    J_history(iter) = computeCostMulti(X, y, theta);
+    cost = computeCostMulti(X, y, theta);
+    printf("%f\n", cost);
+    J_history(iter) = cost;
 
 end
 
