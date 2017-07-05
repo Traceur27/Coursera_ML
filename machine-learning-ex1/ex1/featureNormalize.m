@@ -26,9 +26,10 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
-
-
+mu = mean(X);
+sigma = std(X);
+X = X - repmat(mu, rows(X), 1);
+X = X ./ repmat(sigma, rows(X), 1);
 
 
 
