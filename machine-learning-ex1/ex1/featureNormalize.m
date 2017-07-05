@@ -28,12 +28,8 @@ sigma = zeros(1, size(X, 2));
 
 mu = mean(X);
 sigma = std(X);
-X = X - repmat(mu, rows(X), 1);
-X = X ./ repmat(sigma, rows(X), 1);
-
-
-
-
+X_norm = X - repmat(mu, rows(X), 1);
+X_norm = X_norm ./ repmat(sigma, rows(X), 1);
 
 % ============================================================
 
