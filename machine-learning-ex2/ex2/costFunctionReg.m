@@ -18,9 +18,11 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
-
-
-
+h = sigmoid(X*theta);
+reg = lambda*sum(theta(2:end, :) .^ 2)/(2*m);
+J = sum(-y' * log(h) - (1 - y)' * log(1 - h))/m + reg;
+grad = (X' * (h - y))/m + lambda*theta/m;
+grad(1, :) -= lambda*theta(1, 1)/m;
 
 % =============================================================
 
