@@ -12,13 +12,10 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
-
-
-
-
-
-
-
+positive = X(y(:, 1) == 1, :);
+negative = X(y(:, 1) == 0, :);
+plot(positive(:, 1), positive(:, 2), 'k+','MarkerSize', 7, 'LineWidth', 2);
+plot(negative(:, 1), negative(:, 2), 'ko', 'MarkerSize', 7, 'MarkerFaceColor', 'y');
 
 % =========================================================================
 
