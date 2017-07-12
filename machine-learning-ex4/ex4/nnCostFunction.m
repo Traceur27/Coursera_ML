@@ -67,9 +67,11 @@ Theta2_grad = zeros(size(Theta2));
 %end
 
 a1 = [ones(rows(X), 1) X];
-a2 = sigmoid(a1 * Theta1');
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
 a2 = [ones(rows(a1), 1) a2];
-h = sigmoid(a2 * Theta2');
+z3 = a2 * Theta2';
+h = sigmoid(z3);
 y_temp = y;
 y_temp(y_temp(:, :) == 0, :) = 10; % change 0 to 10
 y2 = zeros(rows(X), num_labels);
@@ -85,6 +87,17 @@ reg = lambda*sum([Theta1(:, 2:end)(:); Theta2(:,2:end)(:)].^2)/(2*m);
 J = -y2.*log(h) - (1 - y2).*log(1 - h);
 J = sum(J(:))/m + reg;
 
+for i=1:m
+	delta_3 = h(i, :) - y2(i, :);
+	delta_3 = delta_3';
+	delta_2 = Theta2' * delta_3 .* a2(i, :)' .* (1 - a2(i, :))';
+
+	Theta1_grad = Theta1_grad + delta_2(2:end, :) * a1(i , :);
+	Theta2_grad = Theta2_grad + delta_3 * a2(i, :);
+end
+
+Theta1_grad /= m;
+Theta2_grad /= m;
 
 % -------------------------------------------------------------
 
