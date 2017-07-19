@@ -218,3 +218,11 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+%% =========== Part 9: Computing test error =============
+fprintf('Computing test error. Should be 3.8599\n');
+[theta] = trainLinearReg(X_poly, y, 3);
+[cost _] = linearRegCostFunction(X_poly_test, ytest, theta, 0);
+fprintf('Test error %f.\n', cost);
+fprintf('Program paused. Press enter to continue.\n');
+pause;
