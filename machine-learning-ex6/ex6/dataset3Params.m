@@ -23,10 +23,24 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+C_params = [0.01 0.03 0.1 0.3 1 3 10 30];
+sigma_params = [0.01 0.03 0.1 0.3 1 3 10 30];
+lowest_error = columns(yval);
 
-
-
-
+for i=1:columns(C_params)
+    for j=1:columns(sigma_params)
+        C_temp = C_params(i);
+        sigma_temp = sigma_params(j);
+        validation_model = svmTrain(X, y, C_temp, @(x1, x2) gaussianKernel(x1, x2, sigma_temp));
+        predictions = svmPredict(validation_model, Xval);
+        error = mean(double(predictions ~= yval));
+        if error < lowest_error
+            lowest_error = error;
+            C = C_temp;
+            sigma = sigma_temp;
+        end
+    end
+end
 
 
 % =========================================================================
