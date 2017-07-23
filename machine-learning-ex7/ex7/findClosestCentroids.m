@@ -21,11 +21,13 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+diffs = zeros(size(X,1), size(centroids, 1));
+for i=1:K
+	diffs(:, i) = sum((X .- centroids(i, :)).^2, 2);
+end
 
-
-
-
-
+diffs(1:3, :)
+[_ idx] = min(diffs, [], 2);
 
 % =============================================================
 
